@@ -26,7 +26,7 @@ export const useHttp = () => {
     const reqToDelete = async (url) => {
         try {
             const response = await request(url, 'DELETE');
-            console.log('Item deleted: ', response);
+
         } catch (error) {
             console.error('Error deleting item:', error);
         }
