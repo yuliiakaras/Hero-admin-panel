@@ -1,5 +1,5 @@
 import {useHttp} from '../../hooks/http.hook';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { heroesFetching, heroesFetched, heroesFetchingError, deleteHero } from '../../actions';
@@ -20,13 +20,16 @@ const HeroesList = () => {
         // eslint-disable-next-line
     }, []);
 
-    const deleteItem = (id) => {
-        reqToDelete(`http://localhost:3001/heroes/${id}`)
-            .then(() => {
-                dispatch(deleteHero(id))
+    const deleteItem = useCallback((id) => {
+
+        request(`http://localhost:3001/heroes/${id}`, 'DELETE')
+            .then(dispatch(deleteHero(id)))
+            .catch(error => {
+                console.error('Error deleting a hero:', error);
             })
 
-    }
+        // eslint-disable-next-line
+    }, [request]);
 
     if (heroesLoadingStatus === "loading") {
         return <Spinner/>;

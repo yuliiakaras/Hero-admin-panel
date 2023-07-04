@@ -23,21 +23,11 @@ export const useHttp = () => {
         }
     }, []);
 
-    const reqToDelete = async (url) => {
-        try {
-            const response = await request(url, 'DELETE');
-
-        } catch (error) {
-            console.error('Error deleting item:', error);
-        }
-    };
-
     // const clearError = useCallback(() => {
         // setProcess('loading');
     // }, []);
 
-    return {request, 
-            reqToDelete
+    return {request
             // clearError, 
             // process, 
             // setProcess

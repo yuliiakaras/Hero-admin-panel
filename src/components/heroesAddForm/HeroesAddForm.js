@@ -50,21 +50,17 @@ const HeroesAddForm = () => {
             onSubmit={ async (values, {resetForm}) => {
                 const myId = uuidv4();
                 const hero = {
-                    id: myId,
-                    ...values
+                    ...values,
+                    id: myId
                 }
-                console.log(myId);
-                console.log(hero)
                 try {
                     const response = await request('http://localhost:3001/heroes', 'POST', JSON.stringify(hero));
                     dispatch(addHero(response));
-                    console.log(response);
                     resetForm();
                 } catch (error) {
                     console.error('Error creating new hero:', error);
                 }
             }}
-            
         >
                 <Form className="border p-4 shadow-lg rounded">
                 <div className="mb-3">
